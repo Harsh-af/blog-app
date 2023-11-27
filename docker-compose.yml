@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+    otp-web:
+        container_name: otp-web
+        build:
+            context: /Users/karanwal-ha/otp-verification
+            dockerfile: Dockerfile
+        volumes:
+            - "/Users/karanwal-ha/otp-verification:/var/www/html"
+        ports:
+            - "8000:8000"
+
+    # PostgreSQL
+    otp-db:
+        container_name: otp-db
+        image: postgres:13
+        environment:
+            POSTGRES_DB: laraveldb
+            POSTGRES_USER: laraveluser
+            POSTGRES_PASSWORD: laravelpass
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+
+volumes:
+    pgdata: {}
